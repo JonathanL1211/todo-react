@@ -31,9 +31,9 @@ class List extends React.Component {
       // render the list with a map() here
       console.log("rendering");
       console.log("LIST: ", this.state.list);
-      const mapTodoList = this.state.list.map((todo, index)=>(
-        <li key={index}>{todo}</li>
-      ))
+      const mapTodoList = this.state.list.map((todo, index)=>{
+        return <li key={index}>{todo}</li>
+      })
       return (
         <div className="list">
           <h3>To-Do-List</h3>
