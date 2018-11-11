@@ -7,7 +7,8 @@ class List extends React.Component {
 
   state = {
     list : [],
-    word : ""
+    word : "",
+    error : ""
   }
 
   changeHandler(event){
@@ -18,13 +19,21 @@ class List extends React.Component {
   }
 
   clickHandler(){
-    const currentList = [...this.state.list];
-    // console.log("currentlist is: ", currentList);
-    currentList.push(this.state.word);
-    //spread operator takes the elements of the whole array
-    this.setState({
-        list: currentList
-    })
+    if (this.state.word.length < 6){
+        this.setState({
+            error: "Length of todo is too short, make it more"
+        })
+    }
+    else {
+        const currentList = [...this.state.list];
+        // console.log("currentlist is: ", currentList);
+        currentList.push(this.state.word);
+        //spread operator takes the elements of the whole array
+        this.setState({
+            error: "",
+            list: currentList
+        })
+    }
   }
 
   render() {
@@ -45,6 +54,8 @@ class List extends React.Component {
           <ol>
             {mapTodoList}
           </ol>
+          <br/>
+          <p>{this.state.error}</p>
         </div>
       );
   }
