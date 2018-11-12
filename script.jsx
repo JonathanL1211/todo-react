@@ -3,6 +3,7 @@ class List extends React.Component {
     super()
     this.changeHandler = this.changeHandler.bind( this );
     this.clickHandler = this.clickHandler.bind( this );
+    this.deleteHandler = this.deleteHandler.bind( this );
   }
 
   state = {
@@ -36,12 +37,26 @@ class List extends React.Component {
     }
   }
 
+  deleteHandler(index){
+    let currentList = this.state.list;
+    //this is to remove the element you want to remove
+    currentList.splice(index, 1)
+    this.setState({
+        list: currentList
+    })
+  }
+
   render() {
       // render the list with a map() here
       console.log("rendering");
       console.log("LIST: ", this.state.list);
       const mapTodoList = this.state.list.map((todo, index)=>{
-        return <li key={index}>{todo}</li>
+        return (
+            <div>
+                <li key={index}>{todo}</li>
+                <button onClick={()=>this.deleteHandler(index)}>Delete</button>
+            </div>
+        )
       })
       return (
         <div className="list">
